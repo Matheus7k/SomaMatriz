@@ -6,20 +6,27 @@
 
         matriz = populaMatriz(matriz);
 
+        separaConsole();
+
         imprimeMatriz(matriz);
 
-        Console.WriteLine("--------------------------");
+        separaConsole();
 
-        imprimeVetor(percorreLinhas(matriz), "linha");
+        somaLinhas(matriz);
 
-        Console.WriteLine("--------------------------");
+        separaConsole();
 
-        imprimeVetor(percorreColunas(matriz), "coluna");
+        somaColunas(matriz);
 
-        Console.WriteLine("--------------------------");
+        separaConsole();
 
         Console.WriteLine($"Soma da diagonal principal: {somaDiagonalPrincipal(matriz)}");
+
+        separaConsole();
+
         Console.WriteLine($"Soma da diagonal principal: {somaDiagonalSecundaria(matriz)}");
+
+        separaConsole();
 
         //Funções
         void imprimeMatriz(int[,] matriz)
@@ -31,14 +38,6 @@
                     Console.Write($" | {matriz[linha, coluna]} | ");
                 }
                 Console.WriteLine();
-            }
-        }
-
-        void imprimeVetor(int[] vetor, string texto)
-        {
-            for(int i = 0; i < vetor.Length; i++)
-            {
-                Console.WriteLine($"Soma da {i+1}° {texto}: {vetor[i]}");
             }
         }
 
@@ -80,58 +79,35 @@
             return somaDiagonalSecundaria;
         }
 
-        int somaLinhas(int[,] matriz, int linhaAtual)
+        void somaLinhas(int[,] matriz)
         {
-            int somaLinhas = 0;
-
-            for(int linha = linhaAtual; linha == linhaAtual; linha++)
+            for(int linha = 0; linha < matriz.GetLength(0) ; linha++)
             {
-                for(int coluna = 0; coluna < 5; coluna++)
+                int somaLinhas = 0;
+                for(int coluna = 0; coluna < matriz.GetLength(1); coluna++)
                 {
                     somaLinhas += matriz[linha, coluna];
                 }
+                Console.WriteLine($"Soma da {linha + 1}° linha: {somaLinhas}");
             }
-
-            return somaLinhas;
         }
 
-        int somaColunas(int[,] matriz, int colunaAtual)
+        void somaColunas(int[,] matriz)
         {
-            int somaColunas = 0;
-
-            for(int coluna = colunaAtual;  coluna == colunaAtual; coluna++)
+            for(int coluna = 0;  coluna < matriz.GetLength(1); coluna++)
             {
-                for(int linha = 0; linha < 5; linha++)
+                int somaColunas = 0;
+                for (int linha = 0; linha < matriz.GetLength(1); linha++)
                 {
                     somaColunas += matriz[linha, coluna];
                 }
+                Console.WriteLine($"Soma da {coluna + 1}° coluna: {somaColunas}");
             }
-
-            return somaColunas;
         }
 
-        int[] percorreLinhas(int[,] matriz)
+        void separaConsole()
         {
-            int[] somas = new int[5];
-
-            for(int i = 0; i < 5; i++)
-            {
-                somas[i] = somaLinhas(matriz, i);
-            }
-
-            return somas;
-        }
-
-        int[] percorreColunas(int[,] matriz)
-        {
-            int[] somas = new int[5];
-
-            for (int i = 0; i < 5; i++)
-            {
-                somas[i] = somaColunas(matriz, i);
-            }
-
-            return somas;
+            Console.WriteLine("-------------------------------------");
         }
     }
 }
